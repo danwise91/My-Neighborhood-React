@@ -13,7 +13,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to My Neighborhood</h1>
         </header>
 
-        <Map id="map" lat= {40.7413549} lng= {-73.9980244} />
+        <Map id="map" lat= {35.8436867} lng= {-78.7851406} />
       </div>
     );
   }
