@@ -3,37 +3,6 @@ import './App.css'
 
 class Map extends Component{
 
-state = {
-  //set 5 destinations around Raleight NC
-  markers:[
-    {
-      name:"Raleigh Airport",
-      location: {lat: 35.879915, lng:-78.788141},
-      address: "2400 John Brantley Blvd Morrisville, NC 27560"
-    },
-    {
-      name:"William B. Umstead State Park",
-      location: {lat: 35.8903808, lng:-78.7503386},
-      address: "8801 Glenwood Ave Raleigh, NC 27617"
-    },
-    {
-      name:"Prestonwood Country Club",
-      location: {lat: 35.7957278, lng:-78.8381674},
-      address: "1197 Crabtree Crossing Pkwy Morrisville, NC 27560"
-    },
-    {
-      name:"North Cary Park",
-      location: {lat: 35.8217956, lng:-78.7901738},
-      address: "1100 Norwell Blvd Cary, NC 27513"
-    },
-    {
-      name:"PNC Arena",
-      location: {lat: 35.8033437, lng:-78.7239833},
-      address: "1400 Edwards Mill Rd Raleigh, NC 27607"
-    }
-  ]
-}
-
 //make sure component did mount then initialize initMap
 componentDidMount(){
   window.initMap = this.initMap
@@ -57,7 +26,7 @@ initMap = (map) => {
   });
 
 //grab reference to all markers in the state
-  const allMarkers = this.state.markers
+  const allMarkers = this.props.markers
 
   //create info window for markers
   const inforWindow = new google.maps.InfoWindow()
@@ -89,7 +58,7 @@ initMap = (map) => {
   }
   //set the info window with a bolded title and address underneath 
   function setInfoWindow(marker, infowindow){
-    if (infowindow.marker != marker){
+    if (infowindow.marker !== marker){
       infowindow.marker = marker
       infowindow.setContent('<div><b>' + marker.title + '</b></div>' + '\n'
         + '<div>' + marker.address + '</div>')
@@ -105,8 +74,7 @@ initMap = (map) => {
 	render(){
    
 		return(  
-			 <div id={this.props.id}>
-      </div>
+			 <div id={this.props.id}></div>
 		)
 	}
 }

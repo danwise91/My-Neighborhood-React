@@ -1,0 +1,22 @@
+/*have a toggle for both the map and search containers
+that will allow the map to take up 100% space or 75% and 
+all the search bar to appear*/
+
+#map-container{
+  width: 75%;
+  position: absolute;
+  right: 0px;
+}
+
+#search-container{
+  width: 25%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  background-color: grey;
+}
+
+#map{
+  height: 100%;
+}
+
