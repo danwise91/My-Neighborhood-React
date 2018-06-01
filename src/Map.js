@@ -106,11 +106,6 @@ initMap = (map) => {
    
 		return(  
 			 <div id={this.props.id}>
-      <input
-        type="text"
-        placeholder="Search Locations"
-        className="searchBar"
-        />
       </div>
 		)
 	}
