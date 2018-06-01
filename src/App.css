@@ -2,9 +2,10 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.searchBar{
+  margin-right: 1200px;
+  margin-top: 400px;
+  z-index: 1;
 }
 
 .App-header {
@@ -18,15 +19,20 @@
   font-size: 1.5em;
 }
 
-.App-intro {
-  font-size: large;
+#map-container{
+  width: 75%;
+  position: absolute;
+  right: 0px;
 }
 
 #map{
   height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+
+#container li {
+  margin-bottom: 10px;
 }
+
+
+
