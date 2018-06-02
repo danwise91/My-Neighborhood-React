@@ -54,6 +54,8 @@ initMap = (map) => {
       marker.addListener('click', function(){
         setInfoWindow(this, inforWindow)
       })
+
+      //makes sure location markers array length is 5 before marker state is updated
       if(locationMarkers.length >= 5){
         this.props.gatherMarkers(locationMarkers)
       }
@@ -68,9 +70,12 @@ initMap = (map) => {
       infowindow.addListener('click', function(){
         infowindow.marker = null
       })
+      marker.setAnimation(window.google.maps.Animation.BOUNCE)
+      window.google.maps.event.addListener(infowindow, 'closeclick', function(){
+        marker.setAnimation(null)
+      })
     }
-  }
-  
+  }  
 }
 
 	render(){
