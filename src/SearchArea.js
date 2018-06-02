@@ -10,24 +10,33 @@ class SearchArea extends Component{
 
 	updateQuery = (query) =>{
 		this.setState({query: query.trim()})
+		const markersArray = this.props.locationMarkers
+		markersArray.forEach(function (location){
+			if(location.title.toLowerCase().indexOf(query.toLowerCase())>= 0){
+				location.setVisible(true)
+			}else {
+				location.setVisible(false)
+			}
+		})
 	}
 
 	render(){
+		console.log("Props", this.props)
+
 		const {query} = this.state
-		const locationNames = this.props.markers
+		const locationNames = this.props.locationMarkers
 		let toggleSearchbar = this.props.showSearch ? 'searchBar' : 'hide-searchbar'
 		let toggleListings = this.props.showSearch ? 'address-listings' : 'hide-address-listings'
 
-		console.log("Props", this.props)
 		let showingResults 
 		if(query){
 			const match = new RegExp(escapeRegExp(query), 'i')
-			showingResults = locationNames.filter((location) => match.test(location.name))
+			showingResults = locationNames.filter((location) => match.test(location.title))
 		} else {
 			showingResults = locationNames
 		}
 
-		showingResults.sort(sortBy('name'))
+		showingResults.sort(sortBy('title'))
 
 		return(
 		<div>
@@ -40,7 +49,7 @@ class SearchArea extends Component{
 	           />
 	            <ul className={toggleListings}>
             		{showingResults.map((location, index) => (
-            		<li key={index}>{location.name}</li>
+            		<li key={index}>{location.title}</li>
             	))}
 				</ul>
            </div>

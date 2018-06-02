@@ -26,35 +26,37 @@ initMap = (map) => {
   });
 
 //grab reference to all markers in the state
-  const allMarkers = this.props.markers
-
+  const allLocations = this.props.locations
+  const locationMarkers = this.props.locationMarkers
   //create info window for markers
   const inforWindow = new google.maps.InfoWindow()
 
-  for (let i = 0; i < allMarkers.length; i++){
+  for (let i = 0; i < allLocations.length; i++){
     // console.log("State", this.state.markers);
-    var position = allMarkers[i].location
-    var title = allMarkers[i].name
-    var address = allMarkers[i].address
+    var position = allLocations[i].location
+    var title = allLocations[i].name
+    var address = allLocations[i].address
 //define the position where the marker will drop
     var marker = new google.maps.Marker({
       map: map,
       position: position,
       title: title,
+      display: true,
       address: address,
       animation: google.maps.Animation.DROP,
       id: 1
     })
     //create a new array to push all markers into then 
     //set the new state of the markers 
-      const newMarkerArray = []
-      newMarkerArray.push(marker)
+      locationMarkers.push(marker)
       //add listener to each marker to open the info window
       //at each marker
       marker.addListener('click', function(){
         setInfoWindow(this, inforWindow)
       })
-      this.setState({markers: newMarkerArray})
+      if(locationMarkers.length >= 5){
+        this.props.gatherMarkers(locationMarkers)
+      }
   }
   //set the info window with a bolded title and address underneath 
   function setInfoWindow(marker, infowindow){
@@ -72,6 +74,7 @@ initMap = (map) => {
 }
 
 	render(){
+    // console.log("Props", this.props)
    
 		return(  
 			 <div id={this.props.id}></div>

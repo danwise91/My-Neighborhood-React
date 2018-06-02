@@ -7,8 +7,8 @@ import SearchArea from './SearchArea'
 class MapArea extends Component{
 
 state = {
-		//set 5 destinations around Raleight NC
-  markers:[
+		//set 5 destinations around Raleigh NC
+  locations:[
     {
       name:"Raleigh Airport",
       location: {lat: 35.879915, lng:-78.788141},
@@ -35,15 +35,14 @@ state = {
       address: "1400 Edwards Mill Rd Raleigh, NC 27607"
     }
   ],
+  locationMarkers: [],
   isOpen: false,
   showSearchContents: true 
 }
-
-  // onChangeClassName = (mapClassName, searchClassName) => {
-  //   //toggles the map and search containers classes 
-  //   className === "map-container" ? "map-expand" : " "
-  //   searchClassName === "search-container" ? "search-hide" : " "
-  // }
+  gatherMarkers = (markersGathered) =>{
+    this.setState({locationMarkers: markersGathered})
+    console.log(this.state.locationMarkers.length)
+  }
 
   changeClassName = (event) => {
     event.stopPropagation()
@@ -52,20 +51,21 @@ state = {
   }
 
 	render(){
+    console.log("State", this.state)
+    const locationMarkers = []
     let toggleMapSize = this.state.isOpen ? 'map-container-expand' : 'map-container'
 		let toggleSearchBarSize = this.state.isOpen ? 'search-container-shrink' : 'search-container'
     return(
 		 <div>
-
 			  <div id={toggleMapSize}>
-        		 <Map id="map" markers={this.state.markers} lat= {35.8436867} lng= {-78.7851406} />
+        		 <Map id="map" gatherMarkers={this.gatherMarkers} locationMarkers = {locationMarkers} locations={this.state.locations} lat= {35.8436867} lng= {-78.7851406} />
 			  </div>
 
 			  <div id={toggleSearchBarSize}>
            <div>
              <button id="search-button" onClick={this.changeClassName}>Search</button>
            </div>
-			  	  <SearchArea markers={this.state.markers} showSearch={this.state.showSearchContents}/>
+			  	  <SearchArea locationMarkers= {this.state.locationMarkers} showSearch={this.state.showSearchContents}/>
 			  </div>
 
 			</div>
