@@ -41,7 +41,7 @@ class SearchArea extends Component{
            <div>
             <ul className="address-listings">
             {showingResults.map((location, index) => (
-            		<li>{location.name}</li>
+            		<li key={index}>{location.name}</li>
             	))}
 				</ul>
            </div>
