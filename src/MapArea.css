@@ -20,3 +20,24 @@ all the search bar to appear*/
   height: 100%;
 }
 
+#search-button{
+	position: absolute;
+	right: 0px;
+}
+
+#map-container-expand{
+  width: 95%;
+  position: absolute;
+  right: 0px;
+}
+
+#search-container-shrink{
+  width: 5%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  background-color: grey;
+}
+
+
+

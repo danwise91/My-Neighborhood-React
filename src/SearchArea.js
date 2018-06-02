@@ -12,12 +12,13 @@ class SearchArea extends Component{
 		this.setState({query: query.trim()})
 	}
 
-
-
 	render(){
 		const {query} = this.state
 		const locationNames = this.props.markers
+		let toggleSearchbar = this.props.showSearch ? 'searchBar' : 'hide-searchbar'
+		let toggleListings = this.props.showSearch ? 'address-listings' : 'hide-address-listings'
 
+		console.log("Props", this.props)
 		let showingResults 
 		if(query){
 			const match = new RegExp(escapeRegExp(query), 'i')
@@ -30,17 +31,15 @@ class SearchArea extends Component{
 
 		return(
 		<div>
-		<div>
-		 <input
-	        type="text"
-	        placeholder="Search Locations"
-	        className="searchBar"
-	        onChange={(event) => this.updateQuery(event.target.value)}
-           />
-          </div>
-           <div>
-            <ul className="address-listings">
-            {showingResults.map((location, index) => (
+		   	<div className="search-contents">
+			   	<input
+		        type="text"
+		        placeholder="Search Locations"
+		        className={toggleSearchbar}
+		        onChange={(event) => this.updateQuery(event.target.value)}
+	           />
+	            <ul className={toggleListings}>
+            		{showingResults.map((location, index) => (
             		<li key={index}>{location.name}</li>
             	))}
 				</ul>

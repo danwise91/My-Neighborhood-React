@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './MapArea.css'
+
 import Map from './Map'
 import SearchArea from './SearchArea'
 
@@ -33,17 +34,38 @@ state = {
       location: {lat: 35.8033437, lng:-78.7239833},
       address: "1400 Edwards Mill Rd Raleigh, NC 27607"
     }
-  ]
-	}
+  ],
+  isOpen: false,
+  showSearchContents: true 
+}
+
+  // onChangeClassName = (mapClassName, searchClassName) => {
+  //   //toggles the map and search containers classes 
+  //   className === "map-container" ? "map-expand" : " "
+  //   searchClassName === "search-container" ? "search-hide" : " "
+  // }
+
+  changeClassName = (event) => {
+    event.stopPropagation()
+    this.setState({isOpen: !this.state.isOpen})
+    this.setState({showSearchContents: !this.state.showSearchContents})
+  }
+
 	render(){
-		return(
-		   <div>
-			  <div id="map-container">
+    let toggleMapSize = this.state.isOpen ? 'map-container-expand' : 'map-container'
+		let toggleSearchBarSize = this.state.isOpen ? 'search-container-shrink' : 'search-container'
+    return(
+		 <div>
+
+			  <div id={toggleMapSize}>
         		 <Map id="map" markers={this.state.markers} lat= {35.8436867} lng= {-78.7851406} />
 			  </div>
 
-			  <div id="search-container">
-			  	<SearchArea markers={this.state.markers}/>
+			  <div id={toggleSearchBarSize}>
+           <div>
+             <button id="search-button" onClick={this.changeClassName}>Search</button>
+           </div>
+			  	  <SearchArea markers={this.state.markers} showSearch={this.state.showSearchContents}/>
 			  </div>
 
 			</div>
