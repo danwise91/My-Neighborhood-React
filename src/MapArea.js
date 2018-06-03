@@ -50,6 +50,8 @@ state = {
     this.setState({showSearchContents: !this.state.showSearchContents})
   }
 
+
+
 	render(){
     console.log("State", this.state)
     const locationMarkers = []
@@ -65,7 +67,7 @@ state = {
            <div>
              <button id="search-button" onClick={this.changeClassName}>Search</button>
            </div>
-			  	  <SearchArea locationMarkers= {this.state.locationMarkers} showSearch={this.state.showSearchContents}/>
+			  	  <SearchArea infoWinFunc={this.openInfoWindow} locationMarkers= {this.state.locationMarkers} showSearch={this.state.showSearchContents}/>
 			  </div>
 
 			</div>

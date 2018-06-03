@@ -20,6 +20,10 @@ class SearchArea extends Component{
 		})
 	}
 
+	setMarker = (location) =>{
+		console.log("hi")
+	}
+
 	render(){
 		console.log("Props", this.props)
 
@@ -49,7 +53,7 @@ class SearchArea extends Component{
 	           />
 	            <ul className={toggleListings}>
             		{showingResults.map((location, index) => (
-            		<li key={index}>{location.title}</li>
+            		<li className="listItem" onClick={this.setMarker} key={index}>{location.title}</li>
             	))}
 				</ul>
            </div>
