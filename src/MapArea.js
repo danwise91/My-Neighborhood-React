@@ -39,7 +39,6 @@ state = {
   isOpen: false,
   prevMarker: "",
   infoWindow: "",
-  searchMarker: {},
   showSearchContents: true 
 }
   gatherMarkers = (markersGathered) =>{
@@ -57,20 +56,11 @@ state = {
     this.setState({infoWindow: infoWin})
   }
 
-  setMarkerFromSideBar = (newMarker) => {
-    this.setState({searchMarker: newMarker})
-    this.setInfoWindow(this.state.searchMarker)
-  }
-
   //set the info window with a bolded title and address underneath 
   setInfoWindow = (marker) => {
       var self = this
       this.closeInfoWindow()
-      // const google = window.google
       this.setState({prevMarker: marker})
-      // google.maps.event.addListener(this.state.map,'bounds_changed', function() {
-      //   this.state.prevMarker.bindTo(this.state.map, 'bounds');
-      // });
       this.state.infoWindow.open(this.state.map, marker)
       this.state.infoWindow.setContent('<div><b>' + marker.title + '</b></div>' + '\n'
         + '<div>' + marker.address + '</div>')
@@ -105,7 +95,7 @@ state = {
            <div>
              <button id="search-button" onClick={this.changeClassName}>Search</button>
            </div>
-			  	  <SearchArea setMarker={this.setMarkerFromSideBar} locationMarkers= {this.state.locationMarkers} showSearch={this.state.showSearchContents}/>
+			  	  <SearchArea closeInfoWin={this.closeInfoWindow} infoString={this.setInfoString} setMarker={this.setInfoWindow} locationMarkers= {this.state.locationMarkers} showSearch={this.state.showSearchContents}/>
 			  </div>
 
 			</div>

@@ -20,6 +20,14 @@ class SearchArea extends Component{
 		})
 	}
 
+	sendMarker = (marker) => {
+  		const google = window.google
+		const infoWindow = new google.maps.InfoWindow()
+	  	this.props.infoString(infoWindow)
+	  	// console.log(marker)
+		this.props.setMarker(marker)
+	}
+
 	render(){
 		// console.log("Props", this.props)
 
@@ -50,7 +58,7 @@ class SearchArea extends Component{
 	           />
 	            <ul className={toggleListings}>
             		{showingResults.map((location, index) => (
-            		<li className="listItem" onClick={this.props.setMarker.bind(location)} key={index}>{location.title}</li>
+            		<li className="listItem" onClick={this.sendMarker.bind(this, location)} key={index}>{location.title}</li>
             	))}
 				</ul>
            </div>

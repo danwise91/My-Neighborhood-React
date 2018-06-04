@@ -27,7 +27,7 @@ initMap = (map) => {
   });
 
   window.google.maps.event.addListener(map, "closeclick", function(){
-    self.props.closeInfoWin
+    self.props.closeInfoWin()
   })
 
 //grab reference to all markers in the state
