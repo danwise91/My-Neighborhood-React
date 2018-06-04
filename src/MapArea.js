@@ -37,6 +37,9 @@ state = {
   ],
   locationMarkers: [],
   isOpen: false,
+  prevMarker: "",
+  infoWindow: "",
+  searchMarker: {},
   showSearchContents: true 
 }
   gatherMarkers = (markersGathered) =>{
@@ -50,24 +53,59 @@ state = {
     this.setState({showSearchContents: !this.state.showSearchContents})
   }
 
+  setInfoString = (infoWin) => {
+    this.setState({infoWindow: infoWin})
+  }
+
+  setMarkerFromSideBar = (newMarker) => {
+    this.setState({searchMarker: newMarker})
+    this.setInfoWindow(this.state.searchMarker)
+  }
+
+  //set the info window with a bolded title and address underneath 
+  setInfoWindow = (marker) => {
+      var self = this
+      this.closeInfoWindow()
+      // const google = window.google
+      this.setState({prevMarker: marker})
+      // google.maps.event.addListener(this.state.map,'bounds_changed', function() {
+      //   this.state.prevMarker.bindTo(this.state.map, 'bounds');
+      // });
+      this.state.infoWindow.open(this.state.map, marker)
+      this.state.infoWindow.setContent('<div><b>' + marker.title + '</b></div>' + '\n'
+        + '<div>' + marker.address + '</div>')
+      marker.setAnimation(window.google.maps.Animation.BOUNCE)
+    window.google.maps.event.addListener(this.state.infoWindow, "closeclick", function(){
+      self.closeInfoWindow()
+    })
+  } 
+
+  closeInfoWindow = () =>{
+    if (this.state.prevMarker){
+      this.state.prevMarker.setAnimation(null)
+    }
+    this.setState({prevMarker: ""})
+    this.state.infoWindow.close()
+  } 
+
 
 
 	render(){
-    console.log("State", this.state)
+    // console.log("State", this.state)
     const locationMarkers = []
     let toggleMapSize = this.state.isOpen ? 'map-container-expand' : 'map-container'
 		let toggleSearchBarSize = this.state.isOpen ? 'search-container-shrink' : 'search-container'
     return(
 		 <div>
 			  <div id={toggleMapSize}>
-        		 <Map id="map" gatherMarkers={this.gatherMarkers} locationMarkers = {locationMarkers} locations={this.state.locations} lat= {35.8436867} lng= {-78.7851406} />
+        		 <Map id="map" infoWin={this.setInfoString} closeInfoWin={this.closeInfoWindow} openInfoWin={this.setInfoWindow} gatherMarkers={this.gatherMarkers} locationMarkers = {locationMarkers} locations={this.state.locations} lat= {35.8436867} lng= {-78.7851406} />
 			  </div>
 
 			  <div id={toggleSearchBarSize}>
            <div>
              <button id="search-button" onClick={this.changeClassName}>Search</button>
            </div>
-			  	  <SearchArea infoWinFunc={this.openInfoWindow} locationMarkers= {this.state.locationMarkers} showSearch={this.state.showSearchContents}/>
+			  	  <SearchArea setMarker={this.setMarkerFromSideBar} locationMarkers= {this.state.locationMarkers} showSearch={this.state.showSearchContents}/>
 			  </div>
 
 			</div>

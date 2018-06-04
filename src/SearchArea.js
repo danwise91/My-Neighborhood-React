@@ -20,12 +20,8 @@ class SearchArea extends Component{
 		})
 	}
 
-	setMarker = (location) =>{
-		console.log("hi")
-	}
-
 	render(){
-		console.log("Props", this.props)
+		// console.log("Props", this.props)
 
 		const {query} = this.state
 		const locationNames = this.props.locationMarkers
@@ -41,6 +37,7 @@ class SearchArea extends Component{
 		}
 
 		showingResults.sort(sortBy('title'))
+		// console.log(showingResults)
 
 		return(
 		<div>
@@ -53,7 +50,7 @@ class SearchArea extends Component{
 	           />
 	            <ul className={toggleListings}>
             		{showingResults.map((location, index) => (
-            		<li className="listItem" onClick={this.setMarker} key={index}>{location.title}</li>
+            		<li className="listItem" onClick={this.props.setMarker.bind(location)} key={index}>{location.title}</li>
             	))}
 				</ul>
            </div>

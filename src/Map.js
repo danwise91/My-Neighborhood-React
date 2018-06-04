@@ -14,6 +14,7 @@ componentDidMount(){
 
 //initialize the map along with the markers
 initMap = (map) => {
+  var self = this
   //must define the google namespace
   const google = window.google
   const getMap = document.getElementById('map')
@@ -25,11 +26,17 @@ initMap = (map) => {
     mayTypeControl: false
   });
 
+  window.google.maps.event.addListener(map, "closeclick", function(){
+    self.props.closeInfoWin
+  })
+
 //grab reference to all markers in the state
   const allLocations = this.props.locations
   const locationMarkers = this.props.locationMarkers
   //create info window for markers
   const inforWindow = new google.maps.InfoWindow()
+
+  this.props.infoWin(inforWindow)
 
   for (let i = 0; i < allLocations.length; i++){
     // console.log("State", this.state.markers);
@@ -49,10 +56,11 @@ initMap = (map) => {
     //create a new array to push all markers into then 
     //set the new state of the markers 
       locationMarkers.push(marker)
+      console.log(locationMarkers)
       //add listener to each marker to open the info window
       //at each marker
       marker.addListener('click', function(){
-        setInfoWindow(this, inforWindow)
+        self.props.openInfoWin(this)
       })
 
       //makes sure location markers array length is 5 before marker state is updated
@@ -60,22 +68,7 @@ initMap = (map) => {
         this.props.gatherMarkers(locationMarkers)
       }
   }
-  //set the info window with a bolded title and address underneath 
-  function setInfoWindow(marker, infowindow){
-    if (infowindow.marker !== marker){
-      infowindow.marker = marker
-      infowindow.setContent('<div><b>' + marker.title + '</b></div>' + '\n'
-        + '<div>' + marker.address + '</div>')
-      infowindow.open(map, marker)
-      infowindow.addListener('click', function(){
-        infowindow.marker = null
-      })
-      marker.setAnimation(window.google.maps.Animation.BOUNCE)
-      window.google.maps.event.addListener(infowindow, 'closeclick', function(){
-        marker.setAnimation(null)
-      })
-    }
-  }  
+  
 }
 
 	render(){
