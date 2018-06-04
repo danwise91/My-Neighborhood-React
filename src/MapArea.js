@@ -20,14 +20,14 @@ state = {
       address: "8801 Glenwood Ave Raleigh, NC 27617"
     },
     {
-      name:"Prestonwood Country Club",
-      location: {lat: 35.7957278, lng:-78.8381674},
-      address: "1197 Crabtree Crossing Pkwy Morrisville, NC 27560"
+      name:"University of North Carolina School of Law",
+      location: {lat: 35.7846633, lng:-78.6820946},
+      address: "Raleigh, NC 27695"
     },
     {
-      name:"North Cary Park",
-      location: {lat: 35.8217956, lng:-78.7901738},
-      address: "1100 Norwell Blvd Cary, NC 27513"
+      name:"Research Triangle Park",
+      location: {lat: 35.9056034, lng:-78.904884},
+      address: "Durham, NC"
     },
     {
       name:"PNC Arena",
@@ -56,14 +56,38 @@ state = {
     this.setState({infoWindow: infoWin})
   }
 
+  setWikipediaContent = (marker) => {
+    var self = this
+    var searchTerm = marker.title
+    var url = "https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=250&pilimit=20&wbptterms=description&gpssearch="+searchTerm+"&gpslimit=20"
+    fetch(url)
+      .then(function(response){
+        if(response.status !== 200){
+          self.state.infoWindow.setContent("Sorry but this data cannot be loaded right now")
+          return
+        }
+        response.json().then(function(data){
+          var image = data.query.pages[0].thumbnail.source
+          var description = data.query.pages[0].terms.description[0]
+
+          // console.log(description)
+          self.state.infoWindow.setContent('<div><b>' + marker.title + '</b></div>' + '\n'
+          + '<div>' + marker.address + '</div>' + '\n'
+          + '<img src=' + image +'>' + '\n'
+          + 'Description: ' + description)
+        })
+      }).catch(function(err){
+        self.state.infoWindow.setContent("Trouble connecting to Wikipedia")
+      })
+  }
+
   //set the info window with a bolded title and address underneath 
   setInfoWindow = (marker) => {
       var self = this
       this.closeInfoWindow()
       this.setState({prevMarker: marker})
       this.state.infoWindow.open(this.state.map, marker)
-      this.state.infoWindow.setContent('<div><b>' + marker.title + '</b></div>' + '\n'
-        + '<div>' + marker.address + '</div>')
+      this.setWikipediaContent(marker)
       marker.setAnimation(window.google.maps.Animation.BOUNCE)
     window.google.maps.event.addListener(this.state.infoWindow, "closeclick", function(){
       self.closeInfoWindow()

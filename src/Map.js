@@ -22,7 +22,7 @@ initMap = (map) => {
 //set the map using exact lat and lng props passed from the App.js component 
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 35.8436867, lng: -78.7851406},
-    zoom: 13,
+    zoom: 11,
     mayTypeControl: false
   });
 
