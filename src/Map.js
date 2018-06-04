@@ -21,14 +21,10 @@ initMap = (map) => {
   getMap.style.height = window.innerHeight + "px"
 //set the map using exact lat and lng props passed from the App.js component 
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: this.props.lat, lng: this.props.lng},
+    center: {lat: 35.8436867, lng: -78.7851406},
     zoom: 13,
     mayTypeControl: false
   });
-
-  window.google.maps.event.addListener(map, "closeclick", function(){
-    self.props.closeInfoWin()
-  })
 
 //grab reference to all markers in the state
   const allLocations = this.props.locations
@@ -56,7 +52,7 @@ initMap = (map) => {
     //create a new array to push all markers into then 
     //set the new state of the markers 
       locationMarkers.push(marker)
-      console.log(locationMarkers)
+      // console.log(locationMarkers)
       //add listener to each marker to open the info window
       //at each marker
       marker.addListener('click', function(){

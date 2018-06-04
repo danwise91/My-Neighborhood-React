@@ -43,7 +43,7 @@ state = {
 }
   gatherMarkers = (markersGathered) =>{
     this.setState({locationMarkers: markersGathered})
-    console.log(this.state.locationMarkers.length)
+    // console.log(this.state.locationMarkers.length)
   }
 
   changeClassName = (event) => {
@@ -88,14 +88,24 @@ state = {
     return(
 		 <div>
 			  <div id={toggleMapSize}>
-        		 <Map id="map" infoWin={this.setInfoString} closeInfoWin={this.closeInfoWindow} openInfoWin={this.setInfoWindow} gatherMarkers={this.gatherMarkers} locationMarkers = {locationMarkers} locations={this.state.locations} lat= {35.8436867} lng= {-78.7851406} />
+        		 <Map id="map" 
+             infoWin={this.setInfoString} 
+             openInfoWin={this.setInfoWindow} 
+             gatherMarkers={this.gatherMarkers} 
+             locationMarkers = {locationMarkers} 
+             locations={this.state.locations} 
+             />
 			  </div>
 
 			  <div id={toggleSearchBarSize}>
            <div>
              <button id="search-button" onClick={this.changeClassName}>Search</button>
            </div>
-			  	  <SearchArea closeInfoWin={this.closeInfoWindow} infoString={this.setInfoString} setMarker={this.setInfoWindow} locationMarkers= {this.state.locationMarkers} showSearch={this.state.showSearchContents}/>
+			  	  <SearchArea 
+            setMarker={this.setInfoWindow} 
+            locationMarkers= {this.state.locationMarkers} 
+            showSearch={this.state.showSearchContents}
+            />
 			  </div>
 
 			</div>

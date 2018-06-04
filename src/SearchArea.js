@@ -21,10 +21,6 @@ class SearchArea extends Component{
 	}
 
 	sendMarker = (marker) => {
-  		const google = window.google
-		const infoWindow = new google.maps.InfoWindow()
-	  	this.props.infoString(infoWindow)
-	  	// console.log(marker)
 		this.props.setMarker(marker)
 	}
 
@@ -44,7 +40,6 @@ class SearchArea extends Component{
 		}
 
 		showingResults.sort(sortBy('title'))
-		// console.log(showingResults)
 
 		return(
 		<div>
