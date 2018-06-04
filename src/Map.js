@@ -87,5 +87,8 @@ function loadJS(src){
   var script = window.document.createElement("script");
     script.src = src;
     script.async = true;
+    script.onerror = function(){
+      document.write("Sorry but Google Maps Cannot Be Loaded Right Now")
+    };
     ref.parentNode.insertBefore(script, ref);
 }

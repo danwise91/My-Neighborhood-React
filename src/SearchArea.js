@@ -30,7 +30,6 @@ class SearchArea extends Component{
 
 	render(){
 		// console.log("Props", this.props)
-
 		const {query} = this.state
 		const locationNames = this.props.locationMarkers
 		let toggleSearchbar = this.props.showSearch ? 'searchBar' : 'hide-searchbar'
