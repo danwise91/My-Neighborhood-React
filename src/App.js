@@ -11,6 +11,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Welcome to My Neighborhood</h1>
+          <span><i>Images and location descriptions provided by the Wikipedia API</i></span>
         </header>
         <MapArea />
       </div>
