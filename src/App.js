@@ -9,7 +9,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <header className="App-header" tab-index="1">
+        <header className="App-header" tabIndex={0}>
           <h1 className="App-title">Welcome to My Neighborhood</h1>
           <span><i>Images and location descriptions provided by the Wikipedia API</i></span>
         </header>

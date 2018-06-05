@@ -52,7 +52,7 @@ class SearchArea extends Component{
 	           />
 	            <ul className={toggleListings}>
             		{showingResults.map((location, index) => (
-            		<li className="listItem" onClick={this.sendMarker.bind(this, location)} key={index} tab-index={index}>{location.title}</li>
+            		<li className="listItem" onClick={this.sendMarker.bind(this, location)} key={index} tabIndex={0}>{location.title}</li>
             	))}
 				</ul>
            </div>
