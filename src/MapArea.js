@@ -110,8 +110,8 @@ state = {
     let toggleMapSize = this.state.isOpen ? 'map-container-expand' : 'map-container'
 		let toggleSearchBarSize = this.state.isOpen ? 'search-container-shrink' : 'search-container'
     return(
-		 <div>
-			  <div id={toggleMapSize}>
+		 <div className="mapArea">
+			  <div role="Application" aria-label="Map Of Raleigh North Carolina" tab-index="3" id={toggleMapSize}>
         		 <Map id="map" 
              infoWin={this.setInfoString} 
              openInfoWin={this.setInfoWindow} 
@@ -121,9 +121,9 @@ state = {
              />
 			  </div>
 
-			  <div id={toggleSearchBarSize}>
+			  <div role="Slider" aria-label="Search Panel" tab-index="2" id={toggleSearchBarSize}>
            <div>
-             <button id="search-button" onClick={this.changeClassName}>Search</button>
+             <button role="Button" aria-label="Button To Display Search Menu" id="search-button" onClick={this.changeClassName}>Search</button>
            </div>
 			  	  <SearchArea 
             setMarker={this.setInfoWindow} 
