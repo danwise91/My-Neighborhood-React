@@ -71,10 +71,10 @@ state = {
           var description = data.query.pages[0].terms.description[0]
 
           // console.log(description)
-          self.state.infoWindow.setContent('<div><b>' + marker.title + '</b></div>' + '\n'
-          + '<div>' + marker.address + '</div>' + '\n'
+          self.state.infoWindow.setContent('<div class="infoWindow"><div><b>' + marker.title + '</b></div>' + '\n'
+          + '<div class="address">' + marker.address + '</div>' + '\n'
           + '<img src=' + image +'>' + '\n'
-          + 'Description: ' + description)
+          + 'Description: ' + description + "</div>")
         })
       }).catch(function(err){
         self.state.infoWindow.setContent("Trouble connecting to Wikipedia")

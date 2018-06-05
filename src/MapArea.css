@@ -9,6 +9,7 @@ all the search bar to appear*/
 }
 
 #search-container{
+  display: flex;
   width: 25%;
   height: 100%;
   position: absolute;
@@ -17,12 +18,14 @@ all the search bar to appear*/
 }
 
 #map{
+  display: flex;
   height: 100%;
 }
 
 #search-button{
 	position: absolute;
 	right: 0px;
+  color: white;
 }
 
 #map-container-expand{
@@ -39,5 +42,44 @@ all the search bar to appear*/
   background-color: grey;
 }
 
+li{
+  padding: 4px;
+}
 
+.infoWindow{
+  display: flex;
+  flex-direction: column;
+}
+
+/*Small device screens*/
+@media only screen and (max-width: 600px){
+  #search-container{
+   width: 35%;
+  }
+  #search-container-shrink{
+    width: 10.2%;
+  }
+  #search-button{
+  right: -6px;
+ }
+ .infoWindow{
+  width: 200px;
+  height: 330px;
+ }
+}
+
+@media only screen and (min-width: 768px){
+ #map-container{
+  height: 100%
+ }
+ #search-container-shrink{
+    width: 11%;
+  }
+ #search-button{
+  font-size: 1em;
+ }
+ li{
+  font-size: 1.2em;
+ }
+}
 

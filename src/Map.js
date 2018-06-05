@@ -30,7 +30,9 @@ initMap = (map) => {
   const allLocations = this.props.locations
   const locationMarkers = this.props.locationMarkers
   //create info window for markers
-  const inforWindow = new google.maps.InfoWindow()
+  const inforWindow = new google.maps.InfoWindow({
+    className: "infoWindow"
+  })
 
   this.props.infoWin(inforWindow)
 
